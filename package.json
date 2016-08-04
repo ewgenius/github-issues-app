@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/ewgenius/github-issues-app/issues"
   },
-  "homepage": "https://github.com/ewgenius/github-issues-app#readme"
+  "homepage": "https://github.com/ewgenius/github-issues-app#readme",
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0"
+  }
 }
