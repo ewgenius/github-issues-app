@@ -5,7 +5,7 @@ const vendor = require('./vendor')
 
 module.exports = {
   entry: {
-    app: ['webpack-dev-server/client?http://localhost:8080/', './src/app.jsx'],
+    app: ['webpack-dev-server/client?http://localhost:8080/', 'babel-polyfill', './src/app.jsx'],
     vendor
   },
   output: {

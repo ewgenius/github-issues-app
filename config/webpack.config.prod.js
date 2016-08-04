@@ -4,7 +4,7 @@ const vendor = require('./vendor')
 
 module.exports = {
   entry: {
-    app: './src/app.jsx',
+    app: ['babel-polyfill', './src/app.jsx'],
     vendor
   },
   output: {

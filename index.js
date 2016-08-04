@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 3000
 const app = express()
 app.use(express.static(path.resolve('./build/')))
 
+app.get('/test', (req, res) => res.send('test'))
+
 const server = app.listen(PORT, () => {
   console.log(`server hosted at ${server.address().port}`)
 })
