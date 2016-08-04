@@ -29,6 +29,7 @@
     "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-jade": "^1.1.0",
+    "gutil": "^1.6.4",
     "imports-loader": "^0.6.5",
     "node-sass": "^3.8.0",
     "sass-loader": "^4.0.0",
