@@ -1,15 +1,17 @@
+const path = require('path')
 const webpack = require('webpack')
 const loaders = require('./loaders')
 const vendor = require('./vendor')
 
 module.exports = {
   entry: {
-    app: './src/app.jsx',
+    app: ['webpack-dev-server/client?http://localhost:8080/', './src/app.jsx'],
     vendor
   },
   output: {
     filename: '[name].bundle.js',
-    path: './dist'
+    publicPath: '/assets/',
+    path: path.resolve('./dist')
   },
   module: {
     loaders

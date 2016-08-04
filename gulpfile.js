@@ -14,6 +14,27 @@ gulp.task('webpack', cb => {
   })
 })
 
+gulp.task('serve', cb => {
+  const compiler = webpack(webpackConfigDev)
+
+  const server = new WebpackDevServer(compiler, {
+    publicPath: '/' + webpackConfigDev.output.publicPath,
+    contentBase: './build',
+    hot: true,
+    proxy: {
+      "*": "http://localhost:3000"
+    },
+    stats: {
+      colors: true
+    }
+  })
+
+  server.listen(8080, 'localhost', err => {
+    if (err) throw new gutil.PluginError('webpack-dev-server', err)
+    gutil.log('[webpack-dev-server]', 'http://localhost:8080')
+  })
+})
+
 gulp.task('jade', () => {
   gulp.src('./src/index.jade')
     .pipe(jade())
