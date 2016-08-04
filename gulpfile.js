@@ -18,7 +18,7 @@ gulp.task('serve', cb => {
   const compiler = webpack(webpackConfigDev)
 
   const server = new WebpackDevServer(compiler, {
-    publicPath: '/' + webpackConfigDev.output.publicPath,
+    //publicPath: '/' + webpackConfigDev.output.publicPath,
     contentBase: './build',
     hot: true,
     proxy: {
