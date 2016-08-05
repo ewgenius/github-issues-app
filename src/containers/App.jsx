@@ -65,6 +65,8 @@ class App extends Component {
         valueRender={project => <div>{project.name}</div>}
         />
 
+      {this.props.children}
+
       <IssuesList
         issues={this.props.issues}
         />

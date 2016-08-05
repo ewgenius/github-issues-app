@@ -1,4 +1,7 @@
 module.exports = [
   'react',
-  'react-dom'
+  'react-dom',
+  'react-router',
+  'redux',
+  'react-redux'
 ]
