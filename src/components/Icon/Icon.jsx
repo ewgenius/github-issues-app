@@ -1,3 +1,3 @@
 import React from 'react'
 
-export default({icon}) => <i className='material-icons'>{icon}</i>
+export default({icon, className}) => <i className={`material-icons ${className}`}>{icon}</i>

@@ -37,8 +37,8 @@ export default class SearchBar extends Component {
 
     return <div className='search-bar'>
       <Icon icon='search'/>
+      { this.props.loading ? <Icon className='spinner' icon='autorenew'/> : null }
       <input placeholder={placeholder} className='search-input' type='text' onChange={e => this.props.onInput(e.target.value)}/>
-      { this.props.loading ? <div className='spinner'>x</div> : null }
       { this.state.showList ? <div className='items-list'>
         {this.props.items.map((item, i) =>
           <div className='item' key={i} onClick={() => this.selectItem(item)}>{valueRender(item)}</div>
