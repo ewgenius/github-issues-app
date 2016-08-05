@@ -4,11 +4,13 @@ import './SearchBar.scss'
 
 export default class SearchBar extends Component {
   static propTypes = {
-    users: PropTypes.array.isRequired,
-    user: PropTypes.object,
+    items: PropTypes.array.isRequired,
+    value: PropTypes.object,
+    placeholder: PropTypes.string,
     loading: PropTypes.bool,
     onInput: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    valueRender: PropTypes.func.isRequired
   }
 
   state = {
@@ -16,30 +18,30 @@ export default class SearchBar extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if (this.props.users.length !== next.users.length) {
+    if (this.props.items.length !== next.items.length) {
       this.setState({
         showList: true
       })
     }
   }
 
-  selectUser(user) {
+  selectItem(value) {
     this.setState({
       showList: false
     })
-    this.props.onSelect(user)
+    this.props.onSelect(value)
   }
 
   render() {
-    const {users, user, onInput, onSelect} = this.props
+    const {items, placeholder, value, onInput, onSelect, valueRender} = this.props
 
     return <div className='search-bar'>
       <Icon icon='search'/>
-      <input className='search-input' type='text' onChange={e => this.props.onInput(e.target.value)}/>
+      <input placeholder={placeholder} className='search-input' type='text' onChange={e => this.props.onInput(e.target.value)}/>
       { this.props.loading ? <div className='spinner'>x</div> : null }
-      { this.state.showList ? <div className='users-list'>
-        {this.props.users.map((user, i) =>
-          <div className='user-item' key={i} onClick={() => this.selectUser(user)}>{user.login}</div>
+      { this.state.showList ? <div className='items-list'>
+        {this.props.items.map((item, i) =>
+          <div className='item' key={i} onClick={() => this.selectItem(item)}>{valueRender(item)}</div>
         )}
       </div> : null }
     </div>

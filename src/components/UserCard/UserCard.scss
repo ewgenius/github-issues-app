@@ -1,7 +1,24 @@
 .user-card {
-  padding: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
+
+  &:not(.small) {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  &.small {
+    padding: 0;
+
+    .avatar {
+      width: 16px;
+      height: 16px;
+    }
+
+    .name {
+      padding-top: 0px;
+      font-size: 14px;
+    }
+  }
 
   .avatar {
     width: 32px;
@@ -13,7 +30,7 @@
 
   .name {
     float: left;
-    padding-top: 8px;
+    padding-top: 6px;
     width: calc(100% - 48px);
   }
 }

@@ -27,7 +27,7 @@
     top: 8px;
   }
 
-  .users-list {
+  .items-list {
     background-color: #fff;
     position: absolute;
     width: 100%;
@@ -35,7 +35,7 @@
     max-height: 200px;
     overflow-y: auto;
 
-    .user-item {
+    .item {
       padding: 8px;
 
       &:hover {
