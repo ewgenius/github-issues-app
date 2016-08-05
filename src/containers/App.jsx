@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {requestUsers, selectUser, requestIssues} from '../store/actions'
+import {requestUsers, selectUser, requestProjects, selectProject, requestIssues} from '../store/actions'
+
 import AppShell from '../components/AppShell/AppShell.jsx'
 import UserCard from '../components/UserCard/UserCard.jsx'
 import SearchBar from '../components/SearchBar/SearchBar.jsx'
+import ProjectSelect from '../components/ProjectSelect/ProjectSelect.jsx'
 import AppBar from '../components/AppBar/AppBar.jsx'
 import IssuesList from '../components/IssuesList/IssuesList.jsx'
 
@@ -12,6 +14,9 @@ function mapState(state) {
     users: state.users,
     user: state.user,
     loadingUsers: state.loadingUsers,
+    projects: state.projects,
+    project: state.project,
+    loadingProjects: state.loadingProjects,
     issues: state.issues,
     loadingIssues: state.loadingIssues
   }
@@ -28,7 +33,11 @@ class App extends Component {
 
   selectUser(user) {
     this.props.dispatch(selectUser(user))
-    this.props.dispatch(requestIssues(user.login))
+    this.props.dispatch(requestProjects(user.login))
+  }
+
+  selectProject(project) {
+    this.props.dispatch(selectProject(project))
   }
 
   render() {
@@ -46,6 +55,15 @@ class App extends Component {
       </AppBar>
 
       <UserCard user={this.props.user}/>
+
+      <ProjectSelect
+        items={this.props.projects}
+        value={this.props.project}
+        placeholder='select project'
+        loading={this.props.loadingProjects}
+        onSelect={project => this.selectProject(project)}
+        valueRender={project => <div>{project.name}</div>}
+        />
 
       <IssuesList
         issues={this.props.issues}

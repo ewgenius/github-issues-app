@@ -10,6 +10,8 @@ export const ERROR_ISSUES = 'ERROR_ISSUES'
 export const REQUEST_PROJECTS = 'REQUEST_PROJECTS'
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const ERROR_PROJECTS = 'ERROR_PROJECTS'
+export const SELECT_PROJECT = 'SELECT_PROJECT'
+
 
 export const requestUsers = (q = '') => dispatch => {
   dispatch({
@@ -57,3 +59,8 @@ export const requestIssues = (author = '') => dispatch => {
     }
   })
 }
+
+export const selectProject = project => ({
+  type: SELECT_PROJECT,
+  project
+})

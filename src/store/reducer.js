@@ -5,13 +5,20 @@ import {
   SELECT_USER,
   REQUEST_ISSUES,
   RECEIVE_ISSUES,
-  ERROR_ISSUES
+  ERROR_ISSUES,
+  REQUEST_PROJECTS,
+  RECEIVE_PROJECTS,
+  ERROR_PROJECTS,
+  SELECT_PROJECT
 } from './actions'
 
 const initial = {
   users: [],
   user: null,
   loadingUsers: false,
+  projects: [],
+  project: null,
+  loadingProjects: false,
   issues: [],
   loadingIssues: false
 }
@@ -39,6 +46,29 @@ export default (state = initial, action) => {
         ...state,
         loadingUsers: false,
         error: action.error
+      }
+      break
+    }
+    case REQUEST_PROJECTS: {
+      return {
+        ...state,
+        loadingProjects: true,
+        projects: []
+      }
+      break
+    }
+    case RECEIVE_PROJECTS: {
+      return {
+        ...state,
+        loadingProjects: false,
+        projects: action.payload.items
+      }
+      break
+    }
+    case SELECT_PROJECT: {
+      return {
+        ...state,
+        project: action.project
       }
       break
     }
