@@ -1,5 +1,46 @@
-  .appbar {
-    padding: 16px;
-    height: 56px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+.search-bar {
+  position: relative;
+  margin-left: -8px;
+
+  .material-icons {
+    position: absolute;
+    padding: 4px;
   }
+
+  .search-input {
+    width: calc(100% - 16px);
+    margin-left: 32px;
+    padding: 8px;
+    border: none;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .spinner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: calc(100% - 24px);
+    top: 8px;
+  }
+
+  .users-list {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+
+    .user-item {
+      padding: 8px;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}

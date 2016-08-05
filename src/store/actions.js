@@ -21,3 +21,8 @@ export const requestUsers = (q = '') => dispatch => {
     }
   })
 }
+
+export const selectUser = user => ({
+  type: SELECT_USER,
+  user
+})

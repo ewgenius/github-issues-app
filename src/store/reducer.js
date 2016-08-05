@@ -43,7 +43,10 @@ export default (state = initial, action) => {
       break
     }
     case SELECT_USER: {
-      return state
+      return {
+        ...state,
+        user: action.user
+      }
       break
     }
     case REQUEST_ISSUES: {
