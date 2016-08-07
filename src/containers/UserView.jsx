@@ -16,7 +16,7 @@ class UserView extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if (!this.props.user || this.props.user.login !== next.params.userLogin) {
+    if (!this.props.user || next.user.login !== next.params.userLogin) {
       this.loadUser(next.params.userLogin)
     }
   }

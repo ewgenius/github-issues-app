@@ -4,15 +4,7 @@ import {requestUsers, selectUser, requestProjects, selectProject} from '../store
 import {push} from 'react-router-redux'
 
 import AppShell from '../components/AppShell/AppShell.jsx'
-import {Grid, Row, Col, Button} from 'react-bootstrap'
-import Select from 'react-select'
-
-function userRender(user) {
-  return <div className='select-user-option'>
-    <img src={user.avatar_url}/>
-    {user.login}
-  </div>
-}
+import SearchBar from '../components/SearchBar/SearchBar.jsx'
 
 function mapState(state) {
   return {
@@ -43,45 +35,17 @@ class App extends Component {
 
   render() {
     return <AppShell>
-      <Grid>
-        <Row>
-          <Col md={5}>
-          <Select
-            value={this.props.user}
-            placeholder='select user'
-            labelKey='login'
-            valueKey='login'
-            clearable={false}
-            isLoading={this.props.loadingUsers}
-            options={this.props.users}
-            onInputChange={q => this.searchUsers(q)}
-            onChange={v => this.selectUser(v)}
-            valueRenderer={userRender}
-            optionRenderer={userRender}
-            />
-          </Col>
-          <Col md={5}>
-            <Select
-              value={this.props.project}
-              placeholder='select project'
-              labelKey='name'
-              valueKey='id'
-              clearable={false}
-              disabled={this.props.user === null}
-              isLoading={this.props.loadingProjects}
-              options={this.props.projects}
-              onChange={v => this.selectProject(v)}
-              />
-          </Col>
-          <Col md={2}>
-            <Button
-              bsStyle='primary'
-              block
-              disabled={this.props.user === null}
-              >search</Button>
-          </Col>
-        </Row>
-      </Grid>
+      <SearchBar
+        user = {this.props.user}
+        users = {this.props.users}
+        project = {this.props.project}
+        projects = {this.props.projects}
+        loadingUsers = {this.props.loadingUsers}
+        loadingProjects = {this.props.loadingProjects}
+        searchUsers = {v => this.searchUsers(v) }
+        selectUser = {v => this.selectUser(v) }
+        selectProject = {v => this.selectProject(v) }
+        />
       {this.props.children}
     </AppShell>
   }
