@@ -14,7 +14,6 @@ export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const ERROR_PROJECTS = 'ERROR_PROJECTS'
 export const SELECT_PROJECT = 'SELECT_PROJECT'
 
-
 export const requestUsers = (q = '') => dispatch => {
   dispatch({
     type: REQUEST_USERS,
@@ -77,14 +76,15 @@ export const selectUser = user => ({
   payload: user
 })
 
-export const requestIssues = (author = '') => dispatch => {
+export const requestIssues = (owner, name, page = 1, limit = 10) => dispatch => {
   dispatch({
     type: REQUEST_ISSUES,
-    payload: author
+    owner,
+    name
   })
   return dispatch({
     [CALL_API]: {
-      endpoint: `/search/issues?q=author:${author}`,
+      endpoint: `/repos/${owner}/${name}/issues?page=${page}&per_page=${limit}`,
       successType: RECEIVE_ISSUES,
       errorType: ERROR_ISSUES
     }

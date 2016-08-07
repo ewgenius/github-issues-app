@@ -11,8 +11,11 @@ app.use(express.static(path.resolve('./build/')))
 app.get('/test', (req, res) => res.send('test'))
 
 function callApi(endpoint) {
+  const token = `access_token=${process.env.ACCESS_TOKEN}`
+  const url = endpoint + (endpoint.indexOf('?') === -1 ?  '?' : '&') + token
+  console.log(url)
   return request({
-    uri: `${API_HOST}${endpoint}`,
+    uri: `${API_HOST}${url}`,
     headers: {
       'User-Agent': 'ewgenius'
     }

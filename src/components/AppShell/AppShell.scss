@@ -1,7 +1,6 @@
 $icon-font-path: '../../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 @import '../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-
-
+@import '../../../node_modules/react-activity/src/Spinner/Spinner.scss';
 @import '../../../node_modules/react-select/scss/select';
 @import '../../../node_modules/react-select/scss/control';
 @import '../../../node_modules/react-select/scss/menu';
@@ -23,4 +22,8 @@ html {
   }
 }
 
-.app-shell {}
+.spinner {
+  display: block !important;
+  width: 30px;
+  margin: 15px auto;
+}

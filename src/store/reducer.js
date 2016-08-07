@@ -21,7 +21,10 @@ const initial = {
   project: null,
   loadingProjects: false,
   issues: [],
-  loadingIssues: false
+  loadingIssues: false,
+  issuesLimit: 10,
+  issuesPage: 1,
+  issuesTotal: 0
 }
 
 export default (state = initial, action) => {
@@ -97,12 +100,23 @@ export default (state = initial, action) => {
       }
     case REQUEST_ISSUES:
       {
-        return state
+        return {
+          ...state,
+          loadingIssues: true,
+          issuesLimit: action.limit,
+          issuesPage: action.page,
+          issues: []
+        }
         break
       }
     case RECEIVE_ISSUES:
       {
-        return state
+        return {
+          ...state,
+          loadingIssues: false,
+          issues: action.payload.items,
+          issuesTotal: action.payload.total_count
+        }
         break
       }
     case ERROR_ISSUES:
