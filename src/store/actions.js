@@ -76,7 +76,7 @@ export const selectUser = user => ({
   payload: user
 })
 
-export const requestIssues = (owner, name, page = 1, limit = 10) => dispatch => {
+export const requestIssues = (owner, name, page = 1, limit = 2) => dispatch => {
   dispatch({
     type: REQUEST_ISSUES,
     owner,

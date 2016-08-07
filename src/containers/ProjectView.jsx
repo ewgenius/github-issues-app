@@ -4,13 +4,17 @@ import {requestProject, requestIssues} from '../store/actions'
 
 import Spinner from 'react-activity/lib/Spinner'
 import IssuesList from '../components/IssuesList/IssuesList.jsx'
+import {Pagination} from 'react-bootstrap'
 
 function mapState(state) {
   return {
     user: state.store.user,
     project: state.store.project,
     issues: state.store.issues,
-    loadingIssues: state.store.loadingIssues
+    loadingIssues: state.store.loadingIssues,
+    page: state.store.issuesPage,
+    issuesTotal: state.store.issuesTotal,
+    issuesLimit: state.store.issuesLimit
   }
 }
 
@@ -42,7 +46,21 @@ class ProjectView extends Component {
 
   render() {
     return <div>
-      {this.props.loadingIssues ? <Spinner className='spinner' /> : <IssuesList issues={this.props.issues}/>}
+      {this.props.loadingIssues ? <Spinner className='spinner' /> : <div>
+        <IssuesList issues={this.props.issues}/>
+
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          items={this.props.total}
+          maxButtons={5}
+          activePage={this.props.page}
+          onSelect={() => {}} />
+      </div>}
     </div>
   }
 }
