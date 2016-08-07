@@ -3,5 +3,8 @@ module.exports = [
   'react-dom',
   'react-router',
   'redux',
-  'react-redux'
+  'react-redux',
+  'react-bootstrap',
+  'react-router-redux',
+  'react-select'
 ]
