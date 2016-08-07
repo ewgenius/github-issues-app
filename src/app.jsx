@@ -4,9 +4,12 @@ import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import {Router, Route, hashHistory} from 'react-router'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import reducer from './store/reducer'
 import api from './store/api'
 import App from './containers/App.jsx'
+
+injectTapEventPlugin()
 
 const root = document.getElementById('root')
 
