@@ -22,7 +22,7 @@ export default store => next => action => {
 
   const {endpoint, successType, errorType} = call
 
-  callApi(endpoint)
+  return callApi(endpoint)
     .then(payload => next({
       type: successType,
       payload

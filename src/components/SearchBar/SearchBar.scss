@@ -1,0 +1,22 @@
+.search-bar {
+  margin-bottom: 15px;
+
+  .select-user-option {
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 4px;
+      margin-top: -2px;
+    }
+  }
+
+  .Select-value-label {
+    .select-user-option {
+      img {
+        margin-top: 4px;
+      }
+    }
+  }
+}

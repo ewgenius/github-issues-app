@@ -30,7 +30,7 @@ class App extends Component {
 
   selectProject(project) {
     this.props.dispatch(selectProject(project))
-    this.props.dispatch(push(`/user/${this.props.params.userLogin}/project/${project.id}`))
+    this.props.dispatch(push(`/user/${this.props.params.userLogin}/project/${project.name}`))
   }
 
   render() {

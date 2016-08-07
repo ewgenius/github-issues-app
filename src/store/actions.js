@@ -9,6 +9,7 @@ export const REQUEST_ISSUES = 'REQUEST_ISSUES'
 export const RECEIVE_ISSUES = 'RECEIVE_ISSUES'
 export const ERROR_ISSUES = 'ERROR_ISSUES'
 export const REQUEST_PROJECTS = 'REQUEST_PROJECTS'
+export const REQUEST_PROJECT = 'REQUEST_PROJECT'
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const ERROR_PROJECTS = 'ERROR_PROJECTS'
 export const SELECT_PROJECT = 'SELECT_PROJECT'
@@ -51,6 +52,21 @@ export const requestProjects = owner => dispatch => {
     [CALL_API]: {
       endpoint: `/search/repositories?q=user:${owner}`,
       successType: RECEIVE_PROJECTS,
+      errorType: ERROR_PROJECTS
+    }
+  })
+}
+
+export const requestProject = (owner, name) => dispatch => {
+  dispatch({
+    type: REQUEST_PROJECT,
+    owner,
+    name
+  })
+  return dispatch({
+    [CALL_API]: {
+      endpoint: `/repos/${owner}/${name}`,
+      successType: SELECT_PROJECT,
       errorType: ERROR_PROJECTS
     }
   })

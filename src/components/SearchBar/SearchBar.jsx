@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {Grid, Row, Col, Button} from 'react-bootstrap'
+import {Row, Col, Button} from 'react-bootstrap'
 import Select from 'react-select'
+import './SearchBar.scss'
 
 function userRender(user) {
   return <div className='select-user-option'>
@@ -12,45 +13,43 @@ function userRender(user) {
 export default class SearchBar extends Component {
   render() {
     return <div className='search-bar'>
-      <Grid>
-        <Row>
-          <Col md={5}>
+      <Row>
+        <Col md={5}>
+        <Select
+          value={this.props.user}
+          placeholder='select user'
+          labelKey='login'
+          valueKey='login'
+          clearable={false}
+          isLoading={this.props.loadingUsers}
+          options={this.props.users}
+          onInputChange={q => this.props.searchUsers(q)}
+          onChange={v => this.props.selectUser(v)}
+          valueRenderer={userRender}
+          optionRenderer={userRender}
+          />
+        </Col>
+        <Col md={5}>
           <Select
-            value={this.props.user}
-            placeholder='select user'
-            labelKey='login'
-            valueKey='login'
+            value={this.props.project}
+            placeholder='select project'
+            labelKey='name'
+            valueKey='id'
             clearable={false}
-            isLoading={this.props.loadingUsers}
-            options={this.props.users}
-            onInputChange={q => this.props.searchUsers(q)}
-            onChange={v => this.props.selectUser(v)}
-            valueRenderer={userRender}
-            optionRenderer={userRender}
+            disabled={this.props.user === null}
+            isLoading={this.props.loadingProjects}
+            options={this.props.projects}
+            onChange={v => this.props.selectProject(v)}
             />
-          </Col>
-          <Col md={5}>
-            <Select
-              value={this.props.project}
-              placeholder='select project'
-              labelKey='name'
-              valueKey='id'
-              clearable={false}
-              disabled={this.props.user === null}
-              isLoading={this.props.loadingProjects}
-              options={this.props.projects}
-              onChange={v => this.props.selectProject(v)}
-              />
-          </Col>
-          <Col md={2}>
-            <Button
-              bsStyle='primary'
-              block
-              disabled={this.props.user === null}
-              >search</Button>
-          </Col>
-        </Row>
-      </Grid>
+        </Col>
+        <Col md={2}>
+          <Button
+            bsStyle='primary'
+            block
+            disabled={this.props.user === null}
+            >search</Button>
+        </Col>
+      </Row>
     </div>
   }
 }

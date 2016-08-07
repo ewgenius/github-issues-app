@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './AppShell.scss'
 
-import {Navbar} from 'react-bootstrap'
+import {Navbar, Grid} from 'react-bootstrap'
 
 export default class AppShell extends Component {
   render() {
@@ -14,7 +14,9 @@ export default class AppShell extends Component {
         </Navbar.Header>
       </Navbar>
 
-      {this.props.children}
+      <Grid>
+        {this.props.children}
+      </Grid>
     </div>
   }
 }

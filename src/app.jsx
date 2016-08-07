@@ -11,6 +11,7 @@ import createLogger from 'redux-logger'
 
 import App from './containers/App.jsx'
 import UserView from './containers/UserView.jsx'
+import ProjectView from './containers/ProjectView.jsx'
 
 const root = document.getElementById('root')
 const logger = createLogger()
@@ -37,7 +38,7 @@ render(
     <Router history={history}>
       <Route path='/' component={App}>
         <Route path='/user/:userLogin' component={UserView}>
-          <Route path='/user/:userLogin/project/:projectId' component={Dummy}/>
+          <Route path='/user/:userLogin/project/:projectName' component={ProjectView}/>
         </Route>
       </Route>
     </Router>
