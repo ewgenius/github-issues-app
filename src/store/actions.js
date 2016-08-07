@@ -1,6 +1,7 @@
 import {CALL_API} from './api'
 
 export const REQUEST_USERS = 'REQUEST_USERS'
+export const REQUEST_USER = 'REQUEST_USER'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const ERROR_USERS = 'ERROR_USERS'
 export const SELECT_USER = 'SELECT_USER'
@@ -27,6 +28,20 @@ export const requestUsers = (q = '') => dispatch => {
   })
 }
 
+export const requestUser = name => dispatch => {
+  dispatch({
+    type: REQUEST_USER,
+    name
+  })
+  return dispatch({
+    [CALL_API]: {
+      endpoint: `/users/${name}`,
+      successType: SELECT_USER,
+      errorType: ERROR_USERS
+    }
+  })
+}
+
 export const requestProjects = owner => dispatch => {
   dispatch({
     type: REQUEST_PROJECTS,
@@ -43,13 +58,13 @@ export const requestProjects = owner => dispatch => {
 
 export const selectUser = user => ({
   type: SELECT_USER,
-  user
+  payload: user
 })
 
 export const requestIssues = (author = '') => dispatch => {
   dispatch({
     type: REQUEST_ISSUES,
-    author
+    payload: author
   })
   return dispatch({
     [CALL_API]: {
@@ -62,5 +77,5 @@ export const requestIssues = (author = '') => dispatch => {
 
 export const selectProject = project => ({
   type: SELECT_PROJECT,
-  project
+  payload: project
 })

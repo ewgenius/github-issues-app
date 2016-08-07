@@ -1,4 +1,5 @@
 import {
+  REQUEST_USER,
   REQUEST_USERS,
   RECEIVE_USERS,
   ERROR_USERS,
@@ -25,74 +26,93 @@ const initial = {
 
 export default (state = initial, action) => {
   switch (action.type) {
-    case REQUEST_USERS: {
-      return {
-        ...state,
-        loadingUsers: true,
-        users: []
+    case REQUEST_USERS:
+      {
+        return {
+          ...state,
+          loadingUsers: true,
+          users: []
+        }
+        break
       }
-      break
-    }
-    case RECEIVE_USERS: {
-      return {
-        ...state,
-        loadingUsers: false,
-        users: action.payload.items
+    case RECEIVE_USERS:
+      {
+        return {
+          ...state,
+          loadingUsers: false,
+          users: action.payload.items
+        }
+        break
       }
-      break
-    }
-    case ERROR_USERS: {
-      return {
-        ...state,
-        loadingUsers: false,
-        error: action.error
+    case ERROR_USERS:
+      {
+        return {
+          ...state,
+          loadingUsers: false,
+          error: action.error
+        }
+        break
       }
-      break
-    }
-    case REQUEST_PROJECTS: {
-      return {
-        ...state,
-        loadingProjects: true,
-        projects: []
+    case REQUEST_PROJECTS:
+      {
+        return {
+          ...state,
+          loadingProjects: true,
+          projects: []
+        }
+        break
       }
-      break
-    }
-    case RECEIVE_PROJECTS: {
-      return {
-        ...state,
-        loadingProjects: false,
-        projects: action.payload.items
+    case RECEIVE_PROJECTS:
+      {
+        return {
+          ...state,
+          loadingProjects: false,
+          projects: action.payload.items
+        }
+        break
       }
-      break
-    }
-    case SELECT_PROJECT: {
-      return {
-        ...state,
-        project: action.project
+    case SELECT_PROJECT:
+      {
+        return {
+          ...state,
+          project: action.payload
+        }
+        break
       }
-      break
-    }
-    case SELECT_USER: {
-      return {
-        ...state,
-        user: action.user
+    case REQUEST_USER:
+      {
+        return {
+          ...state,
+          loadingUsers: true
+        }
       }
-      break
-    }
-    case REQUEST_ISSUES: {
-      return state
-      break
-    }
-    case RECEIVE_ISSUES: {
-      return state
-      break
-    }
-    case ERROR_ISSUES: {
-      return state
-      break
-    }
-    default: {
-      return state
-    }
+    case SELECT_USER:
+      {
+        return {
+          ...state,
+          user: action.payload,
+          loadingUsers: false
+        }
+        break
+      }
+    case REQUEST_ISSUES:
+      {
+        return state
+        break
+      }
+    case RECEIVE_ISSUES:
+      {
+        return state
+        break
+      }
+    case ERROR_ISSUES:
+      {
+        return state
+        break
+      }
+    default:
+      {
+        return state
+      }
   }
 }
