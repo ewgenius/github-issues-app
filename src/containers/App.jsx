@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {requestUsers, selectUser, requestProjects, selectProject} from '../store/actions'
+import {requestUsers, selectUser, requestProjects, selectProject, requestIssues} from '../store/actions'
 import {push} from 'react-router-redux'
 
 import AppShell from '../components/AppShell/AppShell.jsx'
@@ -33,6 +33,11 @@ class App extends Component {
     this.props.dispatch(push(`/user/${this.props.params.userLogin}/project/${project.name}`))
   }
 
+  search() {
+    if (this.props.user && this.props.project)
+      this.props.dispatch(requestIssues(this.props.user.login, this.props.project.name))
+  }
+
   render() {
     return <AppShell>
       <SearchBar
@@ -45,6 +50,7 @@ class App extends Component {
         searchUsers = {v => this.searchUsers(v) }
         selectUser = {v => this.selectUser(v) }
         selectProject = {v => this.selectProject(v) }
+        onSearch = {() => this.search()}
         />
       {this.props.children}
     </AppShell>

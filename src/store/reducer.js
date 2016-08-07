@@ -114,8 +114,8 @@ export default (state = initial, action) => {
         return {
           ...state,
           loadingIssues: false,
-          issues: action.payload.items,
-          issuesTotal: action.payload.total_count
+          issues: action.payload.items || action.payload,
+          issuesTotal: action.payload.total_count || 0
         }
         break
       }

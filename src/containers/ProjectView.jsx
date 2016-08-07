@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {requestProject, requestIssues} from '../store/actions'
+
 import Spinner from 'react-activity/lib/Spinner'
+import IssuesList from '../components/IssuesList/IssuesList.jsx'
 
 function mapState(state) {
   return {
@@ -22,8 +24,11 @@ class ProjectView extends Component {
 
   componentWillReceiveProps(next) {
     if (next.user)
-      if (!this.props.project || next.project.name !== next.params.projectName) {
-        console.log(next.project, next.params)
+      if (
+        !this.props.project ||
+        next.project.name !== next.params.projectName ||
+        this.props.project && this.props.project.name !== next.params.projectName
+      ) {
         this.loadProject(next.params.userLogin, next.params.projectName)
       }
   }
@@ -37,7 +42,7 @@ class ProjectView extends Component {
 
   render() {
     return <div>
-      {this.props.loadingIssues ? <Spinner className='spinner' /> : null}
+      {this.props.loadingIssues ? <Spinner className='spinner' /> : <IssuesList issues={this.props.issues}/>}
     </div>
   }
 }

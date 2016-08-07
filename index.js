@@ -12,6 +12,7 @@ app.get('/test', (req, res) => res.send('test'))
 
 function callApi(endpoint) {
   const token = `access_token=${process.env.ACCESS_TOKEN}`
+  console.log(token)
   const url = endpoint + (endpoint.indexOf('?') === -1 ?  '?' : '&') + token
   console.log(url)
   return request({

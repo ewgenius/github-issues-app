@@ -46,7 +46,8 @@ export default class SearchBar extends Component {
           <Button
             bsStyle='primary'
             block
-            disabled={this.props.user === null}
+            onClick={this.props.onSearch}
+            disabled={this.props.user === null || this.props.project === null}
             >search</Button>
         </Col>
       </Row>
