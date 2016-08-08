@@ -1,5 +1,6 @@
 import {CALL_API} from './api'
 
+export const CLEAN_ALL = 'CLEAN_ALL'
 export const REQUEST_USERS = 'REQUEST_USERS'
 export const REQUEST_USER = 'REQUEST_USER'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
@@ -13,6 +14,10 @@ export const REQUEST_PROJECT = 'REQUEST_PROJECT'
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'
 export const ERROR_PROJECTS = 'ERROR_PROJECTS'
 export const SELECT_PROJECT = 'SELECT_PROJECT'
+
+export const cleanAll = () => ({
+  type: CLEAN_ALL
+})
 
 export const requestUsers = (q = '') => dispatch => {
   dispatch({

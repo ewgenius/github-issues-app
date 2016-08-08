@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {requestUsers, selectUser, requestProjects, selectProject, requestIssues} from '../store/actions'
+import {requestUsers, selectUser, requestProjects, selectProject, requestIssues, cleanAll} from '../store/actions'
 import {push} from 'react-router-redux'
 
 import AppShell from '../components/AppShell/AppShell.jsx'

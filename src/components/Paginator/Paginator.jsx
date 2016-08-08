@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {Row, Col, ButtonGroup, Button, Pagination} from 'react-bootstrap'
+import './Paginator.scss'
 
 export default class Paginator extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ export default class Paginator extends Component {
     return <div className='paginator'>
       <Row>
         <Col md={8}>
-          <Pagination
+          { this.props.total > 0 ?<Pagination
             prev
             next
             first
@@ -24,12 +25,12 @@ export default class Paginator extends Component {
             items={this.props.total}
             maxButtons={5}
             activePage={this.props.page}
-            onSelect={page => this.props.goTo(page)} />
+            onSelect={page => this.props.goTo(page)} /> : null }
         </Col>
         <Col md={4}>
           <ButtonGroup>
             {
-              [10, 50, 100].map(l => {
+              [2, 10, 50, 100].map(l => {
                 const selected = this.props.limit === l
                 return <Button
                   key={l}

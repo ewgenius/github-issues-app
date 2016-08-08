@@ -20,25 +20,19 @@ function mapState(state) {
 
 class ProjectView extends Component {
   componentDidMount() {
-    if (this.props.user)
-      if (!this.props.project && this.props.user) {
-        this.loadProject(this.props.params.userLogin, this.props.params.projectName)
-      }
+    this.loadProject(this.props.params.userLogin, this.props.params.projectName)
   }
 
   componentWillReceiveProps(next) {
-    if (!this.props.user && next.user && next.project) {
-      this.loadProject(next.params.userLogin, next.params.projectName)
-    }
-
-    if (next.user)
+    if (next.user) {
       if (
-        !this.props.user
-        //next.project.name !== next.params.projectName ||
-        //this.props.project && this.props.project.name !== next.params.projectName
+        next.project && !this.props.project ||
+        !this.props.user ||
+        this.props.project && this.props.project.name !== next.params.projectName
       ) {
         this.loadProject(next.params.userLogin, next.params.projectName)
       }
+    }
   }
 
   loadProject(owner, name) {

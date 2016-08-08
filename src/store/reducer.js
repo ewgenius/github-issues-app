@@ -10,7 +10,8 @@ import {
   REQUEST_PROJECTS,
   RECEIVE_PROJECTS,
   ERROR_PROJECTS,
-  SELECT_PROJECT
+  SELECT_PROJECT,
+  CLEAN_ALL
 } from './actions'
 
 const initial = {
@@ -29,6 +30,10 @@ const initial = {
 
 export default (state = initial, action) => {
   switch (action.type) {
+    case CLEAN_ALL: {
+      return initial
+      break
+    }
     case REQUEST_USERS:
       {
         return {
@@ -78,7 +83,9 @@ export default (state = initial, action) => {
       {
         return {
           ...state,
-          project: action.payload
+          project: action.payload,
+          issuesTotal: 0,
+          issues: []
         }
         break
       }
@@ -86,7 +93,11 @@ export default (state = initial, action) => {
       {
         return {
           ...state,
-          loadingUsers: true
+          loadingUsers: true,
+          issuesTotal: 0,
+          issues: [],
+          project: null,
+          projects: []
         }
       }
     case SELECT_USER:
@@ -94,7 +105,7 @@ export default (state = initial, action) => {
         return {
           ...state,
           user: action.payload,
-          loadingUsers: false
+          loadingUsers: false,
         }
         break
       }
@@ -105,18 +116,18 @@ export default (state = initial, action) => {
           loadingIssues: true,
           issuesLimit: action.limit,
           issuesPage: action.page,
+          issuesTotal: 0,
           issues: []
         }
         break
       }
     case RECEIVE_ISSUES:
       {
-        console.log(action.payload)
         return {
           ...state,
           loadingIssues: false,
           issues: action.payload.items || action.payload,
-          issuesTotal: action.pagination.total || 0
+          issuesTotal: action.pagination ? action.pagination.total || state.issuesTotal : 0
         }
         break
       }

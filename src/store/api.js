@@ -2,11 +2,15 @@ export const CALL_API = Symbol('CALL_API')
 
 function parsePagination(link) {
   if (link) {
+    const first = link.match(/page=(\d+)\S+>; rel="first"/)
+    const prev = link.match(/page=(\d+)\S+>; rel="prev"/)
     const next = link.match(/page=(\d+)\S+>; rel="next"/)
     const last = link.match(/page=(\d+)\S+>; rel="last"/)
-    console.log(link)
     return {
+      first: first ? parseInt(first[1]) : null,
+      prev: prev ? parseInt(prev[1]) : null,
       next: next ? parseInt(next[1]) : null,
+      last: last ? parseInt(last[1]) : null,
       total: last ? parseInt(last[1]) : null
     }
   }
