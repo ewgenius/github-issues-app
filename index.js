@@ -12,21 +12,29 @@ app.get('/test', (req, res) => res.send('test'))
 
 function callApi(endpoint) {
   const token = `access_token=${process.env.ACCESS_TOKEN}`
-  console.log(token)
   const url = endpoint + (endpoint.indexOf('?') === -1 ?  '?' : '&') + token
-  console.log(url)
   return request({
     uri: `${API_HOST}${url}`,
     headers: {
       'User-Agent': 'ewgenius'
+    },
+    transform: (body, response) => {
+      return {
+        body: JSON.parse(body.trim()),
+        headers: response.headers
+      }
     }
   })
-    .then(result => JSON.parse(result.trim()))
 }
 
 app.get('/*', (req, res) => {
   return callApi(`${req.originalUrl}`)
-    .then(response => res.send(response))
+    .then(response => {
+      Object.keys(response.headers).forEach(header => {
+        res.setHeader(header, response.headers[header])
+      })
+      res.send(response.body)
+    })
     .catch(error => {
       res
         .status(error.statusCode)

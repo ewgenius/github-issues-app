@@ -4,7 +4,7 @@ import {requestProject, requestIssues} from '../store/actions'
 
 import Spinner from 'react-activity/lib/Spinner'
 import IssuesList from '../components/IssuesList/IssuesList.jsx'
-import {Pagination} from 'react-bootstrap'
+import Paginator from '../components/Paginator/Paginator.jsx'
 
 function mapState(state) {
   return {
@@ -13,8 +13,8 @@ function mapState(state) {
     issues: state.store.issues,
     loadingIssues: state.store.loadingIssues,
     page: state.store.issuesPage,
-    issuesTotal: state.store.issuesTotal,
-    issuesLimit: state.store.issuesLimit
+    total: state.store.issuesTotal,
+    limit: state.store.issuesLimit
   }
 }
 
@@ -27,21 +27,29 @@ class ProjectView extends Component {
   }
 
   componentWillReceiveProps(next) {
+    if (!this.props.user && next.user && next.project) {
+      this.loadProject(next.params.userLogin, next.params.projectName)
+    }
+
     if (next.user)
       if (
-        !this.props.project ||
-        next.project.name !== next.params.projectName ||
-        this.props.project && this.props.project.name !== next.params.projectName
+        !this.props.user
+        //next.project.name !== next.params.projectName ||
+        //this.props.project && this.props.project.name !== next.params.projectName
       ) {
         this.loadProject(next.params.userLogin, next.params.projectName)
       }
   }
 
   loadProject(owner, name) {
-    this.props.dispatch(requestProject(owner, name))
-    .then(action => {
-      this.props.dispatch(requestIssues(owner, name))
-    })
+    return this.props.dispatch(requestProject(owner, name))
+      .then(action => {
+        this.loadIssues(this.props.params.userLogin, this.props.params.projectName)
+      })
+  }
+
+  loadIssues(owner, name, page, limit = this.props.limit) {
+    return this.props.dispatch(requestIssues(owner, name, page, limit))
   }
 
   render() {
@@ -49,17 +57,13 @@ class ProjectView extends Component {
       {this.props.loadingIssues ? <Spinner className='spinner' /> : <div>
         <IssuesList issues={this.props.issues}/>
 
-        <Pagination
-          prev
-          next
-          first
-          last
-          ellipsis
-          boundaryLinks
-          items={this.props.total}
-          maxButtons={5}
-          activePage={this.props.page}
-          onSelect={() => {}} />
+        <Paginator
+          page={this.props.page}
+          total={this.props.total}
+          limit={this.props.limit}
+          goTo={page => this.loadIssues(this.props.params.userLogin, this.props.params.projectName, page)}
+          goToLimit={(page, limit) => this.loadIssues(this.props.params.userLogin, this.props.params.projectName, page, limit)}
+        />
       </div>}
     </div>
   }

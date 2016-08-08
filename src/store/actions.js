@@ -76,11 +76,13 @@ export const selectUser = user => ({
   payload: user
 })
 
-export const requestIssues = (owner, name, page = 1, limit = 2) => dispatch => {
+export const requestIssues = (owner, name, page = 1, limit = 10) => dispatch => {
   dispatch({
     type: REQUEST_ISSUES,
     owner,
-    name
+    name,
+    page,
+    limit
   })
   return dispatch({
     [CALL_API]: {

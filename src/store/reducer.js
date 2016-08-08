@@ -111,11 +111,12 @@ export default (state = initial, action) => {
       }
     case RECEIVE_ISSUES:
       {
+        console.log(action.payload)
         return {
           ...state,
           loadingIssues: false,
           issues: action.payload.items || action.payload,
-          issuesTotal: action.payload.total_count || 0
+          issuesTotal: action.pagination.total || 0
         }
         break
       }
